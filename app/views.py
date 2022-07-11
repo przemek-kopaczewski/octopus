@@ -3,8 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
 
-# Create your views here.
-
+#main page, without login you didn't see page
 @login_required(login_url='login/')
-def test(request):
-    return render(request, 'view.html')
+def index(request):
+    return render(request, 'index.html')
