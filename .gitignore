@@ -1,3 +1,4 @@
 .idea
 venv/
 AdminLTE
+app/__pycache__/
