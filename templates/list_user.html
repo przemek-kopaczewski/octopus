@@ -1,0 +1,47 @@
+{% extends 'index.html' %}
+
+{% block title %} Lista użytkowników {% endblock %}
+
+{% block main %}
+<div class="row">
+<div class="col-12">
+<div class="card">
+<div class="card-header">
+<h3 class="card-title">Lista użytkowników</h3>
+</div>
+
+<div class="card-body table-responsive p-0" style="height: 300px;">
+<table class="table table-head-fixed text-nowrap">
+<thead>
+<tr>
+    <th>Imie</th>
+    <th>Nazwisko</th>
+    <th>Email</th>
+    <th>Telefon</th>
+    <th>Akcje</th>
+</tr>
+</thead>
+<tbody>
+{% for user in all_users %}
+<tr>
+    <td>{{ user.name}}</td>
+    <td>{{ user.last_name}}</td>
+    <td>{{ user.username }}</td>
+    <td>{{ user.phone_number }}</td>
+    <td>
+        <div class="btn-group">
+            <button type="button" onclick="location.href='{% url 'edit_user' user.id %}'" class="btn btn-info">Edytuj</button>
+            <button type="button" onclick="location.href='{% url 'delete_user' user.id %}'" class="btn btn-danger">Usuń</button>
+        </div>
+    </td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+
+</div>
+
+</div>
+</div>
+{% endblock %}

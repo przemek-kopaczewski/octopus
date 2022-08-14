@@ -1,0 +1,64 @@
+{% extends 'index.html' %}
+
+{% block title %} Rejestrowanie uzytkownika {% endblock %}
+
+{% block main %}
+<div class="col-md-6">
+  <div class="card card-info">
+    <div class="card-header">
+      {% if new %}
+        <h3 class="card-title">Rejestracja</h3>
+      {% else %}
+        <h3 class="card-title">Edycja użytkownika</h3>
+      {% endif %}
+    </div>
+
+
+    <form class="form-horizontal" method="post">
+      {% csrf_token %}
+      <div class="card-body">
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Imię</label>
+          <div class="col-sm-10">
+            <input name="name" class="form-control" placeholder="Imię">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Nazwisko</label>
+          <div class="col-sm-10">
+            <input name="last_name" class="form-control" placeholder="Nazwisko">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+          <div class="col-sm-10">
+            <input name="username" type="email" class="form-control" id="inputEmail3" placeholder="Email">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputPassword3" class="col-sm-2 col-form-label">Hasło</label>
+          <div class="col-sm-10">
+            <input name="password" type="password" class="form-control" id="inputPassword3" placeholder="Hasło">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Telefon</label>
+          <div class="col-sm-10">
+            <input name="phone_number" class="form-control" placeholder="Telefon">
+          </div>
+        </div>
+      </div>
+
+      <div class="card-footer">
+        {% if new %}
+          <button type="submit" class="btn btn-info">Zarejestruj sie</button>
+        {% else %}
+          <button type="submit" class="btn btn-info">Edytuj</button>
+        {% endif %}
+        <button type="button" onclick="location.href='{% url 'index' %}'" class="btn btn-danger">Anuluj</button>
+      </div>
+
+    </form>
+  </div>
+</div>
+{% endblock %}
