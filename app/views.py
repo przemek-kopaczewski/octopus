@@ -14,31 +14,8 @@ def index(request):
 
 
 @login_required(login_url='login/')
-def register(request):
+def create_user(request):
     form = CustomUserForm(request.POST or None)
-    if form.is_valid():
-        username = form.cleaned_data['username']
-        name = form.cleaned_data['name']
-        last_name = form.cleaned_data['last_name']
-        password = make_password(form.cleaned_data['password'])
-        phone_number = form.cleaned_data['phone_number']
-        user = CustomUser(username=username, name=name, last_name=last_name, password=password, phone_number=phone_number)
-        user.save()
-        return redirect(index)
-
-    return render(request, 'register_user.html', {'form' : form, 'new' : True})
-
-
-def get_users(request):
-    User = get_user_model()
-    all_users = User.objects.all()
-    return render(request, 'list_user.html', {'all_users' : all_users})
-
-
-@login_required(login_url='login/')
-def edit_user(request, id):
-    User = get_object_or_404(CustomUser, pk=id)
-    form = CustomUserForm(request.POST or None, instance=User)
     if form.is_valid():
         username = form.cleaned_data['username']
         name = form.cleaned_data['name']
@@ -50,15 +27,37 @@ def edit_user(request, id):
         user.save()
         return redirect(index)
 
-    return render(request, 'register_user.html', {'form': form, 'new' : False})
+    return render(request, 'register_user.html', {'form': form, 'new': True})
+
+
+def get_users(request):
+    user = get_user_model()
+    all_users = user.objects.all()
+    return render(request, 'list_user.html', {'all_users': all_users})
+
+
+@login_required(login_url='login/')
+def edit_user(request, id):
+    user = get_object_or_404(CustomUser, pk=id)
+    form = CustomUserForm(request.POST, instance=user)
+    if form.is_valid():
+        form.username = form.cleaned_data['username']
+        form.name = form.cleaned_data['name']
+        form.last_name = form.cleaned_data['last_name']
+        form.password = make_password(form.cleaned_data['password'])
+        form.phone_number = form.cleaned_data['phone_number']
+        form.save()
+        return redirect(index)
+
+    return render(request, 'register_user.html', {'form': form, 'new': False})
 
 
 @login_required(login_url='login/')
 def delete_user(request, id):
-    User = get_object_or_404(CustomUser, pk=id)
+    user = get_object_or_404(CustomUser, pk=id)
 
     if request.method == "POST":
-        User.delete()
+        user.delete()
         return redirect(index)
 
-    return render(request, 'delete_user.html', {'user': User})
+    return render(request, 'delete_user.html', {'user': user})

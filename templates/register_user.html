@@ -1,20 +1,20 @@
 {% extends 'index.html' %}
 
-{% block title %} Rejestrowanie uzytkownika {% endblock %}
+{% block title %} Dodawanie uzytkownika {% endblock %}
 
 {% block main %}
 <div class="col-md-6">
   <div class="card card-info">
     <div class="card-header">
       {% if new %}
-        <h3 class="card-title">Rejestracja</h3>
+        <h3 class="card-title">Dodawanie użytkownika</h3>
       {% else %}
         <h3 class="card-title">Edycja użytkownika</h3>
       {% endif %}
     </div>
 
 
-    <form class="form-horizontal" method="post">
+    <form method="POST" class="form-horizontal">
       {% csrf_token %}
       <div class="card-body">
         <div class="form-group row">
