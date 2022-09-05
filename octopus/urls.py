@@ -7,9 +7,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-    path('create_user/', create_user, name='create_user'),
-    path('lists/', get_users, name='lists'),
-    path('edit_user/<int:id>/', edit_user, name='edit_user'),
-    path('delete/<int:id>/', delete_user, name='delete_user'),
+    path('users/create', create_user, name='create_user'),
+    path('users/list', get_users, name='lists'),
+    path('users/edit/<int:id>/', edit_user, name='edit_user'),
+    path('users/delete/<int:id>/', delete_user, name='delete_user'),
     path('', index, name='index'),
 ]
