@@ -3,6 +3,7 @@
 {% block title %} Dodawanie uzytkownika {% endblock %}
 
 {% block main %}
+{% if perms.app.can_add_user %}
 <div class="col-md-6">
   <div class="card card-info">
     <div class="card-header">
@@ -61,4 +62,7 @@
     </form>
   </div>
 </div>
+{% else %}
+<h2>Nie mozesz dodac ani edytowac uzytkownikow</h2>
+{% endif %}
 {% endblock %}

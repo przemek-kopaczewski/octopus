@@ -3,6 +3,7 @@
 {% block title %} Lista użytkowników {% endblock %}
 
 {% block main %}
+{% if perms.app.can_view_user %}
 <div class="row">
 <div class="col-12">
 <div class="card">
@@ -44,4 +45,7 @@
 
 </div>
 </div>
+{% else %}
+<h2>Nie mozesz zobaczyc listy, nie masz uprawnien</h2>
+{% endif %}
 {% endblock %}

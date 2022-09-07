@@ -3,9 +3,13 @@
 {% block title %} Lista użytkowników {% endblock %}
 
 {% block main %}
-<h3>Czy na pewno chcesz usunac {{ user.username }}</h3>
-<form method="post">
-  {% csrf_token %}
-  <button type="submit" class="btn btn-danger">Usuń</button>
-</form>
+{% if perms.app.can_delete_user %}
+  <h3>Czy na pewno chcesz usunac {{ user.username }}</h3>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Usuń</button>
+  </form>
+{% else %}
+  <h3>Nie mozesz usunac uzytkownika, nie masz na to uprawnien</h3>
+{% endif %}
 {% endblock %}
