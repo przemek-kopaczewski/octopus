@@ -47,8 +47,31 @@
             <input name="phone_number" class="form-control" placeholder="Telefon">
           </div>
         </div>
-      </div>
+        {% if new %}
+        {% else %}
+        <div class="col-sm-6">
 
+            <div class="form-group">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="post_permission" value="view_customuser">
+                <label class="form-check-label">Możliwość zobaczenia użytkowników</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="post_permission" value="add_customuser">
+                <label class="form-check-label">Dodawanie użytkownika</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="post_permission" value="change_customuser">
+                <label class="form-check-label">Edytowanie użytkownika</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="post_permission" value="delete_customuser">
+                <label class="form-check-label">Usuwanie użytkownika</label>
+              </div>
+            </div>
+        </div>
+      </div>
+      {% endif %}
       <div class="card-footer">
         {% if new %}
           <button type="submit" class="btn btn-info">Zarejestruj sie</button>
