@@ -44,6 +44,7 @@ def get_users(request):
 def edit_user(request, id):
     user = get_object_or_404(CustomUser, pk=id)
     form = CustomUserForm(request.POST, instance=user)
+    permissions = Permission.objects.all()
     if form.is_valid():
         form.username = form.cleaned_data['username']
         form.name = form.cleaned_data['name']
@@ -58,7 +59,7 @@ def edit_user(request, id):
         return redirect(index)
 
 
-    return render(request, 'register_user.html', {'form': form, 'new': False})
+    return render(request, 'register_user.html', {'form': form, 'new': False, 'permissions': permissions})
 
 
 @login_required(login_url='login/')
