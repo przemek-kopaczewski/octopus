@@ -58,7 +58,6 @@ def edit_user(request, id):
         form.save()
         return redirect(index)
 
-
     return render(request, 'register_user.html', {'form': form, 'new': False, 'permissions': permissions})
 
 
