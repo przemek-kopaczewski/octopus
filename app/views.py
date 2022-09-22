@@ -15,7 +15,7 @@ def index(request):
 
 
 @login_required(login_url='login/')
-@permission_required("add_customuser")
+@permission_required("app.add_customuser")
 def create_user(request):
     form = CustomUserForm(request.POST or None)
     if form.is_valid():
@@ -32,7 +32,8 @@ def create_user(request):
     return render(request, 'register_user.html', {'form': form, 'new': True})
 
 
-@permission_required("view_customuser")
+@login_required(login_url='login/')
+@permission_required("app.view_customuser")
 def get_users(request):
     user = get_user_model()
     all_users = user.objects.all()
@@ -40,7 +41,7 @@ def get_users(request):
 
 
 @login_required(login_url='login/')
-@permission_required("change_customuser")
+@permission_required("app.change_customuser")
 def edit_user(request, id):
     user = get_object_or_404(CustomUser, pk=id)
     form = CustomUserForm(request.POST, instance=user)
@@ -49,12 +50,13 @@ def edit_user(request, id):
         form.username = form.cleaned_data['username']
         form.name = form.cleaned_data['name']
         form.last_name = form.cleaned_data['last_name']
-        form.password = make_password(form.cleaned_data['password'])
+        #form.password = make_password(form.cleaned_data['password'])
         form.phone_number = form.cleaned_data['phone_number']
         form.post_permission = request.POST.getlist('post_permission')
         for perm in form.post_permission:
             permission = Permission.objects.get(codename=perm)
             user.user_permissions.add(permission)
+        user.set_password(form.cleaned_data['password'])
         form.save()
         return redirect(index)
 
@@ -62,7 +64,7 @@ def edit_user(request, id):
 
 
 @login_required(login_url='login/')
-@permission_required("delete_customuser")
+@permission_required("app.delete_customuser")
 def delete_user(request, id):
     user = get_object_or_404(CustomUser, pk=id)
 
