@@ -1,7 +1,6 @@
 {% extends 'index.html' %}
 
 {% block title %} Dodawanie uzytkownika {% endblock %}
-
 {% block main %}
 <div class="col-md-6">
   <div class="card card-info">
@@ -47,8 +46,19 @@
             <input name="phone_number" class="form-control" placeholder="Telefon">
           </div>
         </div>
+        {% if new %}
+        {% else %}
+        <div class="col-sm-6">
+            <div class="form-group">
+              <select class="js-example-basic-multiple" name="post_permission" multiple="multiple">
+              {% for permission in permissions %}
+                <option value="{{ permission.codename }}">{{ permission.name }}</option>
+              {% endfor %}
+              </select>
+            </div>
+        </div>
       </div>
-
+      {% endif %}
       <div class="card-footer">
         {% if new %}
           <button type="submit" class="btn btn-info">Zarejestruj sie</button>
@@ -57,8 +67,14 @@
         {% endif %}
         <button type="button" onclick="location.href='{% url 'index' %}'" class="btn btn-danger">Anuluj</button>
       </div>
-
     </form>
   </div>
 </div>
+{% block scripts %}
+<script>
+  $(document).ready(function() {
+    $('.js-example-basic-multiple').select2();
+  });
+</script>
+{% endblock %}
 {% endblock %}
