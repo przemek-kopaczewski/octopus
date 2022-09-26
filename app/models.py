@@ -12,3 +12,7 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.username
+
+
+class UserFiles(models.Model):
+    user_files = models.FileField(upload_to='user_files', null=True, blank=True)
