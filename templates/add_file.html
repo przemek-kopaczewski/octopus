@@ -3,9 +3,25 @@
 {% block title %} Dodawanie pliku {% endblock %}
 
 {% block main %}
-<form method="POST" enctype="multipart/form-data">
+<div class="col-md-6">
+  <div class="card card-info">
+    <div class="card-header">
+        <h3 class="card-title">Dodawanie pliku</h3>
+    </div>
+<form method="POST" enctype="multipart/form-data" class="form-horizontal">
     {% csrf_token %}
-    {{ form }}
-    <button type="submit" class="btn btn-info">Wyślij plik</button>
+    <div class="card-body">
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Wybierz plik do wyslania</label>
+            <div class="col-sm-8">
+            {{ form.user_files }}
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <button type="submit" class="btn btn-info">Wyślij plik</button>
+    </div>
 </form>
+  </div>
+</div>
 {% endblock %}

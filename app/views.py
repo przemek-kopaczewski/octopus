@@ -76,9 +76,9 @@ def delete_user(request, id):
 
 def add_file(request):
     form = UserFilesForm(request.POST or None, request.FILES or None)
-
     if form.is_valid():
-        form.save()
+        file = UserFiles(user_files=request.FILES['user_files'])
+        file.save()
         return redirect(list_of_files)
 
     return render(request, 'add_file.html', {'form': form})
