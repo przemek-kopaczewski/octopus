@@ -122,6 +122,30 @@
               </li>
             </ul>
           </li>
+          {% if perms.app.view_userfiles %}
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <p>
+                Obsługa plików
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              {% if perms.app.add_userfiles %}
+              <li class="nav-item">
+                <a href="{% url 'add_file' %}" class="nav-link">
+                  <p>Dodaj plik</p>
+                </a>
+              </li>
+              {% else %}
+              {% endif %}
+              <li class="nav-item">
+                <a href="{% url 'list_of_files' %}" class="nav-link">
+                  <p>Lista plików</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          {% endif %}
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

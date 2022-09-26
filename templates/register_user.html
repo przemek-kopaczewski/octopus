@@ -48,9 +48,10 @@
         </div>
         {% if new %}
         {% else %}
-        <div class="col-sm-6">
-            <div class="form-group">
-              <select class="js-example-basic-multiple" name="post_permission" multiple="multiple">
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Uprawnienia</label>
+          <div class="col-sm-10">
+              <select class="js-example-basic-multiple" name="post_permission" multiple="multiple" data-placeholder="Wybierz uprawnienia"  style="width: 100%;">
               {% for permission in permissions %}
                 <option value="{{ permission.codename }}">{{ permission.name }}</option>
               {% endfor %}

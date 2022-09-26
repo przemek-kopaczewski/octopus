@@ -1,11 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
-from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django.contrib.auth import get_user_model
-from .forms import CustomUserForm
-from .models import CustomUser
+from .forms import CustomUserForm, UserFilesForm
+from .models import CustomUser, UserFiles
 from django.contrib.auth.hashers import make_password
-from django.contrib.auth.models import Permission
+from django.contrib.auth.models import Permission, Group
+from octopus import settings
 
 
 #main page, without login you didn't see page
@@ -50,7 +51,6 @@ def edit_user(request, id):
         form.username = form.cleaned_data['username']
         form.name = form.cleaned_data['name']
         form.last_name = form.cleaned_data['last_name']
-        #form.password = make_password(form.cleaned_data['password'])
         form.phone_number = form.cleaned_data['phone_number']
         form.post_permission = request.POST.getlist('post_permission')
         for perm in form.post_permission:
@@ -73,3 +73,28 @@ def delete_user(request, id):
         return redirect(index)
 
     return render(request, 'delete_user.html', {'user': user})
+
+
+def add_file(request):
+    form = UserFilesForm(request.POST or None, request.FILES or None)
+
+    if form.is_valid():
+        form.save()
+        return redirect(list_of_files)
+
+    return render(request, 'add_file.html', {'form': form})
+
+
+def list_of_files(request):
+    files = UserFiles.objects.all()
+    return render(request, 'list_of_files.html', {'all_files': files})
+
+
+def delete_file(request, id):
+    file = get_object_or_404(UserFiles, pk=id)
+
+    if request.method == "POST":
+        file.delete()
+        return redirect(index)
+
+    return render(request, 'delete_file.html', {'file': file})

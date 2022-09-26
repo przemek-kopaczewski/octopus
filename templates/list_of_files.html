@@ -1,0 +1,44 @@
+{% extends 'index.html' %}
+
+{% block title %} Lista plików {% endblock %}
+
+{% block main %}
+<div class="row">
+<div class="col-12">
+<div class="card">
+<div class="card-header">
+<h3 class="card-title">Lista plików</h3>
+</div>
+
+<div class="card-body table-responsive p-0" style="height: 300px;">
+<table class="table table-head-fixed text-nowrap">
+<thead>
+<tr>
+    <th>Nazwa pliku</th>
+    {% if perms.app.delete_userfiles%}
+    <th>Akcje</th>
+    {% endif %}
+</tr>
+</thead>
+<tbody>
+{% for files in all_files %}
+<tr>
+    <td>{{ files.user_files }}</td>
+    {% if perms.app.delete_userfiles%}
+    <td>
+        <div class="btn-group">
+            <button type="button" onclick="location.href='{% url 'delete_file' user.id %}'" class="btn btn-danger">Usuń</button>
+        </div>
+    </td>
+    {% endif %}
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+
+</div>
+
+</div>
+</div>
+{% endblock %}
