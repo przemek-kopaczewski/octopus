@@ -6,3 +6,4 @@ octopus/__pycache__/
 app/migrations/__pycache__/
 db.sqlite3
 app/migrations/
+media/
