@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django.contrib.auth import get_user_model
-from .forms import CustomUserForm, UserFilesForm, UserCustomForm
+from .forms import UserFilesForm, UserCustomForm
 from .models import CustomUser, UserFiles
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import Permission

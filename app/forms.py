@@ -2,12 +2,6 @@ from django import forms
 from .models import CustomUser, UserFiles
 
 
-class CustomUserForm(forms.ModelForm):
-    class Meta:
-        model = CustomUser
-        fields = ['username', 'name', 'last_name', 'password', 'phone_number']
-
-
 class UserFilesForm(forms.ModelForm):
     class Meta:
         model = UserFiles
