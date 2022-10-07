@@ -22,7 +22,7 @@
 </tr>
 </thead>
 <tbody>
-{% for user in all_users %}
+{% for user in object_list %}
 <tr>
     <td>{{ user.name}}</td>
     <td>{{ user.last_name}}</td>
@@ -30,7 +30,7 @@
     <td>{{ user.phone_number }}</td>
     <td>
         <div class="btn-group">
-            <button type="button" onclick="location.href='{% url 'edit_user' user.id %}'" class="btn btn-info">Edytuj</button>
+            <button type="button" onclick="location.href='{% url 'change_user' user.id %}'" class="btn btn-info">Edytuj</button>
             <button type="button" onclick="location.href='{% url 'delete_user' user.id %}'" class="btn btn-danger">Usuń</button>
         </div>
     </td>

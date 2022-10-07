@@ -1,12 +1,11 @@
 {% extends 'index.html' %}
 
-{% block title %} Dodawanie uzytkownika {% endblock %}
+{% block title %} Edycja uzytkownika {% endblock %}
 {% block main %}
-{% if perms.app.add_customuser %}
 <div class="col-md-6">
   <div class="card card-info">
     <div class="card-header">
-        <h3 class="card-title">Dodawanie użytkownika</h3>
+        <h3 class="card-title">Edycja użytkownika</h3>
     </div>
 
 
@@ -45,14 +44,17 @@
         </div>
       </div>
       <div class="card-footer">
-          <button type="submit" class="btn btn-info">Zarejestruj sie</button>
+          <button type="submit" class="btn btn-info">Edytuj</button>
         <button type="button" onclick="location.href='{% url 'index' %}'" class="btn btn-danger">Anuluj</button>
       </div>
     </form>
   </div>
 </div>
-{% else %}
-<h2>Brak uprawnień do dodania użytkownika</h2>
-<button type="button" onclick="location.href='{% url 'index' %}'" class="btn btn-danger">Powrót</button>
-{% endif %}
+{% block scripts %}
+<script>
+  $(document).ready(function() {
+    $('.js-example-basic-multiple').select2();
+  });
+</script>
+{% endblock %}
 {% endblock %}

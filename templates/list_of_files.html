@@ -15,7 +15,7 @@
 <thead>
 <tr>
     <th>Nazwa pliku</th>
-    {% if perms.app.delete_userfiles%}
+    {% if perms.app.delete_userfiles %}
     <th>Akcje</th>
     {% endif %}
 </tr>
@@ -24,7 +24,7 @@
 {% for files in all_files %}
 <tr>
     <td>{{ files.user_files }}</td>
-    {% if perms.app.delete_userfiles%}
+    {% if perms.app.delete_userfiles %}
     <td>
         <div class="btn-group">
             <button type="button" onclick="location.href='{% url 'delete_file' user.id %}'" class="btn btn-danger">Usuń</button>
