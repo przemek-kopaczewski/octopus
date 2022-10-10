@@ -3,7 +3,7 @@
 {% block title %} Lista użytkowników {% endblock %}
 
 {% block main %}
-<h3>Czy na pewno chcesz usunac {{ user.username }}</h3>
+<h3>Czy na pewno chcesz usunac {{ object }}</h3>
 <form method="post">
   {% csrf_token %}
   <button type="submit" class="btn btn-danger">Usuń</button>
