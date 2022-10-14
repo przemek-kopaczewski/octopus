@@ -1,7 +1,7 @@
 {% extends 'index.html' %}
 
 {% block title %} Lista plików {% endblock %}
-
+{% block page_name %} Lista plików w repozytorium {% endblock %}
 {% block main %}
 <div class="row">
 <div class="col-12">
@@ -27,7 +27,7 @@
     {% if perms.app.delete_userfiles %}
     <td>
         <div class="btn-group">
-            <button type="button" onclick="location.href='{% url 'delete_file' user.id %}'" class="btn btn-danger">Usuń</button>
+            <button type="button" onclick="location.href='{% url 'delete_file' files.id %}'" class="btn btn-danger">Usuń</button>
         </div>
     </td>
     {% endif %}

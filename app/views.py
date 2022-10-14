@@ -1,14 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse
-from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
-from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 from .forms import UserFilesForm, UserCustomForm
 from .models import CustomUser, UserFiles
 from django.contrib.auth.hashers import make_password
-from django.contrib.auth.models import Permission
 from django.views.generic import ListView
 from django.views.generic.edit import FormView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.decorators import permission_required
 
 
 @login_required(login_url='login/')
@@ -55,6 +53,8 @@ class UserDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     permission_required = 'app.delete_customuser'
 
 
+@login_required(login_url='login/')
+@permission_required('app.add_userfiles')
 def add_file(request):
     form = UserFilesForm(request.POST or None, request.FILES or None)
     if form.is_valid():
@@ -65,11 +65,15 @@ def add_file(request):
     return render(request, 'add_file.html', {'form': form})
 
 
+@login_required(login_url='login/')
+@permission_required('app.view_userfiles')
 def list_of_files(request):
     files = UserFiles.objects.all()
     return render(request, 'list_of_files.html', {'all_files': files})
 
 
+@login_required(login_url='login/')
+@permission_required('app.delete_userfiles')
 def delete_file(request, id):
     file = get_object_or_404(UserFiles, pk=id)
 

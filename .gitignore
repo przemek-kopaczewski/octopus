@@ -7,3 +7,5 @@ app/migrations/__pycache__/
 db.sqlite3
 app/migrations/
 media/
+Dockerfile
+docker-compose.yml
