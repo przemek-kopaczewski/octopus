@@ -1,7 +1,7 @@
 {% extends 'index.html' %}
 
 {% block title %} Dodawanie pliku {% endblock %}
-
+{% block page_name%} Dodawanie pliku do repozytorium aplikacji {% endblock %}
 {% block main %}
 <div class="col-md-6">
   <div class="card card-info">
@@ -12,7 +12,7 @@
     {% csrf_token %}
     <div class="card-body">
         <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Wybierz plik do wyslania</label>
+            <label class="col-sm-4 col-form-label">Wybierz niepusty plik do wysłania</label>
             <div class="col-sm-8">
             {{ form.user_files }}
             </div>

@@ -41,41 +41,10 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Home</a>
+        <a href="{% url 'index' %}" class="nav-link">Główna</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
-      </li>
-    </ul>
-
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-      <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-header">15 Notifications</span>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
-            <span class="float-right text-muted text-sm">3 mins</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 8 friend requests
-            <span class="float-right text-muted text-sm">12 hours</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> 3 new reports
-            <span class="float-right text-muted text-sm">2 days</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-        </div>
+        <a href="#" class="nav-link">Kontakt</a>
       </li>
     </ul>
   </nav>
@@ -84,7 +53,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="#" class="brand-link">
       <img src="{% static 'dist/img/AdminLTELogo.png' %}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">AdminLTE 3</span>
     </a>
@@ -110,16 +79,20 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+              {% if perms.app.add_customuser %}
               <li class="nav-item">
                 <a href="{% url 'create_user' %}" class="nav-link">
                   <p>Dodaj użytkownika</p>
                 </a>
               </li>
+              {% endif %}
+              {% if perms.app.view_customuser %}
               <li class="nav-item">
                 <a href="{% url 'list_user' %}" class="nav-link">
                   <p>Lista użytkowników</p>
                 </a>
               </li>
+              {% endif %}
             </ul>
           </li>
           {% if perms.app.view_userfiles %}
@@ -136,7 +109,6 @@
                   <p>Dodaj plik</p>
                 </a>
               </li>
-              {% else %}
               {% endif %}
               <li class="nav-item">
                 <a href="{% url 'list_of_files' %}" class="nav-link">
@@ -159,13 +131,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Starter Page</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
-              <li class="breadcrumb-item active">Starter Page</li>
-            </ol>
+            <h1 class="m-0">{% block page_name %}Starter Page{% endblock %}</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
