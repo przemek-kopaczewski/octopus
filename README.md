@@ -20,7 +20,8 @@ which I use for learning and getting to know the framework. It is a CRUD applica
 ## Setup
 <p>Requirements version Python at least 3.9 and pip (optional Docker)</p>
 <p>Clone the repo</p>
-git clone https://github.com/przemek-kopaczewski/octopus.git
+<p>git clone https://github.com/przemek-kopaczewski/octopus.git</p>
+<p>pip install -r requirements.txt</p>
 <p>Run command: 'python manage.py runserver'</p>
 <p>Or if you have Docker run: 'docker-compose up'</p>
 
